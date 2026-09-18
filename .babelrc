@@ -1,0 +1,14 @@
+{
+  "presets": ["next/babel", "@babel/preset-typescript"],
+  "plugins": [
+    [
+      "@stylexjs/babel-plugin",
+      {
+        "runtimeInjection": false,
+        "styleResolution": "property-specificity",
+        "aliases": { "@/*": ["/ROOT/src/*"] },
+        "unstable_moduleResolution": { "type": "commonJS", "rootDir": "." }
+      }
+    ]
+  ]
+}

@@ -1,69 +1,112 @@
-import Image from "next/image";
+import * as stylex from "@stylexjs/stylex";
+import Link from "next/link";
+import { Brand } from "@/components/layout/Brand";
+import { Button } from "@/components/ui/button";
+import { colors } from "@/lib/tokens.stylex";
 
-export default function Home() {
+const styles = stylex.create({
+  page: { display: "flex", flexDirection: "column", minHeight: "100dvh" },
+  header: {
+    alignItems: "center",
+    display: "flex",
+    justifyContent: "space-between",
+    paddingBlock: "1.25rem",
+    paddingInline: "clamp(1rem, 4vw, 3rem)",
+  },
+  hero: {
+    display: "grid",
+    flex: 1,
+    gap: "2.5rem",
+    gridTemplateColumns: { default: "1.15fr 1fr", "@media (max-width: 900px)": "1fr" },
+    paddingBlock: "clamp(2rem, 8vh, 6rem)",
+    paddingInline: "clamp(1rem, 4vw, 3rem)",
+  },
+  eyebrow: {
+    color: colors.primary,
+    fontSize: "0.8rem",
+    fontWeight: 700,
+    letterSpacing: "0.25em",
+    textTransform: "uppercase",
+  },
+  title: {
+    fontFamily: "var(--font-display)",
+    fontSize: "clamp(2.1rem, 5vw, 3.6rem)",
+    fontWeight: 800,
+    lineHeight: 1.05,
+    marginBlock: "1rem 1.5rem",
+    textTransform: "uppercase",
+  },
+  lead: { color: colors.mutedForeground, fontSize: "1.1rem", lineHeight: 1.6, maxWidth: "36rem" },
+  actions: {
+    alignItems: "center",
+    display: "flex",
+    flexWrap: "wrap",
+    gap: "1rem",
+    marginTop: "2rem",
+  },
+  hint: { color: colors.mutedForeground, fontSize: "0.85rem" },
+  card: {
+    alignSelf: "center",
+    backgroundColor: colors.primary,
+    borderRadius: "1.25rem",
+    color: colors.primaryForeground,
+    display: "grid",
+    gap: "1.25rem",
+    padding: "clamp(1.5rem, 3vw, 2.5rem)",
+  },
+  cardTitle: {
+    fontFamily: "var(--font-display)",
+    fontSize: "1.1rem",
+    fontWeight: 700,
+    textTransform: "uppercase",
+  },
+  steps: { display: "grid", gap: "0.9rem", listStyle: "none", margin: 0, padding: 0 },
+  step: { alignItems: "baseline", display: "flex", gap: "0.8rem", lineHeight: 1.5 },
+  stepNumber: { color: colors.accent, fontFamily: "var(--font-display)", fontWeight: 800 },
+});
+
+const STEPS = [
+  "Décrivez votre site en 8 courtes étapes (10 minutes).",
+  "Nous chiffrons vos coûts visibles et cachés : facture, carburant, arrêts de production, personnel immobilisé.",
+  "Trois scénarios solaires sont comparés : économies, délai de retour, coût cumulé sur 10 ans.",
+  "Vous recevez un rapport de 9 pages, prêt à présenter à votre direction.",
+];
+
+export default function HomePage() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert h-5 w-[100px]"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the{" "}
-            <code className="rounded bg-black/[.06] px-1.5 py-0.5 font-mono text-[0.9em] dark:bg-white/[.08]">
-              page.tsx
-            </code>{" "}
-            file.
+    <main {...stylex.props(styles.page)}>
+      <header {...stylex.props(styles.header)}>
+        <Brand />
+      </header>
+      <section {...stylex.props(styles.hero)}>
+        <div>
+          <p {...stylex.props(styles.eyebrow)}>Diagnostic énergétique</p>
+          <h1 {...stylex.props(styles.title)}>
+            Combien vous coûte vraiment l&apos;instabilité du réseau ?
           </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
+          <p {...stylex.props(styles.lead)}>
+            Coupures, groupe électrogène, production perdue : mesurez le coût annuel réel de votre
+            alimentation électrique et découvrez le scénario solaire qui le réduit le plus vite.
           </p>
+          <div {...stylex.props(styles.actions)}>
+            <Button size="lg" render={<Link href="/diagnostic" />}>
+              Commencer le diagnostic
+            </Button>
+            <span {...stylex.props(styles.hint)}>Gratuit · aucune création de compte</span>
+          </div>
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert h-[14px] w-4"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={14}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+        <aside {...stylex.props(styles.card)}>
+          <h2 {...stylex.props(styles.cardTitle)}>Comment ça marche</h2>
+          <ol {...stylex.props(styles.steps)}>
+            {STEPS.map((step, i) => (
+              <li key={step} {...stylex.props(styles.step)}>
+                <span {...stylex.props(styles.stepNumber)}>0{i + 1}</span>
+                <span>{step}</span>
+              </li>
+            ))}
+          </ol>
+        </aside>
+      </section>
+    </main>
   );
 }

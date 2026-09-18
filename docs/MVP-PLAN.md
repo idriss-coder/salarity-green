@@ -184,6 +184,9 @@ Admin : `/admin/login`, `/admin` (tableau : date, entreprise, email, total, scé
 
 ## 8. Lots
 
+État au 18 septembre 2026 : lots 1, 2, 3 livrés et vérifiés (build, 26 tests, PDF DELIFOOD comparé page à page) ; lots 4, 5, 6 codés, en attente d'un cluster MongoDB Atlas pour la recette de bout en bout. `docs/output/delifood-genere.pdf` = rapport généré par le moteur pour comparaison avec le modèle.
+
+
 L'ordre place le cœur de valeur (moteur → PDF) en premier, testé sur DELIFOOD sans attendre l'UI.
 
 | Lot | Livrable | Sortie vérifiable | Durée |

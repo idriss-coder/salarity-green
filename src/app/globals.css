@@ -1,26 +1,104 @@
 @import "tailwindcss";
 
+/* Composants StyleX (shadcn-cssinjs) : la directive est remplacée par le CSS compilé (postcss.config.mjs). */
+@stylex;
+
+/*
+ * Jetons de thème partagés (mêmes variables que shadcn/ui, lues par components/ui/tokens.stylex.ts).
+ * Palette Solarity : vert profond du rapport en primaire, vert clair en accent.
+ */
+/* Mêmes polices que le rapport PDF, servies localement (next/font est indisponible avec Babel/StyleX). */
+@font-face { font-family: "Open Sans"; font-weight: 400; font-display: swap; src: url("/fonts/OpenSans-Regular.ttf") format("truetype"); }
+@font-face { font-family: "Open Sans"; font-weight: 600; font-display: swap; src: url("/fonts/OpenSans-SemiBold.ttf") format("truetype"); }
+@font-face { font-family: "Open Sans"; font-weight: 700; font-display: swap; src: url("/fonts/OpenSans-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 700; font-display: swap; src: url("/fonts/Montserrat-Bold.ttf") format("truetype"); }
+@font-face { font-family: "Montserrat"; font-weight: 800; font-display: swap; src: url("/fonts/Montserrat-ExtraBold.ttf") format("truetype"); }
+
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --font-sans: "Open Sans";
+  --font-display: "Montserrat";
+  --radius: 0.75rem;
+  --background: oklch(0.99 0.004 120);
+  --foreground: oklch(0.2 0.03 150);
+  --card: oklch(1 0 0);
+  --card-foreground: oklch(0.2 0.03 150);
+  --popover: oklch(1 0 0);
+  --popover-foreground: oklch(0.2 0.03 150);
+  --primary: oklch(0.37 0.08 150); /* #224929 */
+  --primary-foreground: oklch(0.99 0 0);
+  --secondary: oklch(0.95 0.02 120);
+  --secondary-foreground: oklch(0.3 0.05 150);
+  --muted: oklch(0.95 0.01 120);
+  --muted-foreground: oklch(0.5 0.02 150);
+  --accent: oklch(0.75 0.15 125); /* #94b94e */
+  --accent-foreground: oklch(0.2 0.03 150);
+  --destructive: oklch(0.577 0.245 27.325);
+  --destructive-foreground: oklch(0.99 0 0);
+  --border: oklch(0.9 0.01 120);
+  --input: oklch(0.9 0.01 120);
+  --ring: oklch(0.6 0.12 140);
+  --chart-1: oklch(0.65 0.15 250);
+  --chart-2: oklch(0.7 0.17 145);
+  --chart-3: oklch(0.7 0.18 50);
+  --chart-4: oklch(0.85 0.17 95);
+  --chart-5: oklch(0.6 0.12 300);
+}
+
+.dark {
+  --background: oklch(0.2 0.03 150);
+  --foreground: oklch(0.98 0 0);
+  --card: oklch(0.24 0.03 150);
+  --card-foreground: oklch(0.98 0 0);
+  --popover: oklch(0.24 0.03 150);
+  --popover-foreground: oklch(0.98 0 0);
+  --primary: oklch(0.75 0.15 125);
+  --primary-foreground: oklch(0.2 0.03 150);
+  --secondary: oklch(0.3 0.03 150);
+  --secondary-foreground: oklch(0.98 0 0);
+  --muted: oklch(0.3 0.03 150);
+  --muted-foreground: oklch(0.75 0.01 150);
+  --accent: oklch(0.75 0.15 125);
+  --accent-foreground: oklch(0.2 0.03 150);
+  --destructive: oklch(0.65 0.2 25);
+  --destructive-foreground: oklch(0.98 0 0);
+  --border: oklch(0.35 0.03 150);
+  --input: oklch(0.35 0.03 150);
+  --ring: oklch(0.7 0.12 140);
 }
 
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+  --font-sans: var(--font-sans);
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+* {
+  border-color: var(--border);
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  font-family: var(--font-sans), system-ui, sans-serif;
+  -webkit-font-smoothing: antialiased;
 }
